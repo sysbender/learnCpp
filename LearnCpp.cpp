@@ -75,7 +75,7 @@ namespace LearnCpp
                 }
             };
 		}
-		TEST_METHOD(AutoType)
+		TEST_METHOD(test_AutoType)
 		{
 			std::string name = "Bill";
 			Logger::WriteMessage("foo");
@@ -99,7 +99,7 @@ namespace LearnCpp
 
 		}
 
-		TEST_METHOD(foreach) {
+		TEST_METHOD(test_foreach) {
 			vector<int> v = { 2,3,4,5 };
 			// cpp 03
 			for (vector<int>::iterator it = v.begin(); it != v.end(); it++) {
@@ -110,10 +110,36 @@ namespace LearnCpp
 
 
 				// cpp 11
+
+
+                for (int& i : v) {  // change value
+                    i += 100;
+                }
+
 				for (int i : v) { // works with class has begin() and end()
-				tlog << i << "\t";
-			}
+					tlog << i << "\t";
+				}
 
 		}
+
+		void foo(int i) { tlog << "int ===== " << i; }
+		void foo(char* pc) {
+            if (pc) {
+                tlog << " char ======" << *pc;
+            }
+            else {
+                tlog << " char ======" << " nullptr ";
+            }
+             
+        }
+
+        TEST_METHOD(test_nullptr) {
+
+
+            foo(NULL);  // cpp  03 , NULL is int 0
+            foo(nullptr); // cpp 11 , nullptr
+
+
+        }
 	};
 }
