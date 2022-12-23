@@ -195,7 +195,18 @@ namespace LearnCpp
             };
         }
 
+        TEST_METHOD(test_force_default_constructor) {
+            class Dog {                
+            public:
+                string name = "dog";
+                Dog( string name) :name(name){}
+                Dog() = default;
+            };
 
+            Dog d1;
+            tlog << "default dog name: " << d1.name;
+
+        }
 
 	};
 }
