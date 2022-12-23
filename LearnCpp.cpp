@@ -160,5 +160,28 @@ namespace LearnCpp
 
 
         }
+
+        TEST_METHOD(test_delegating_constructor) {
+            // cpp 03 not support call another constructor from constructor like java
+            // cpp 11
+            class Dog {
+                string name;
+                int age = 0;
+            public:
+                
+                Dog( string name, int age) : name(name), age(age){} // member-initializer
+
+                Dog(string name) :
+                    Dog(name , 0)
+                {
+                    /*
+                    * When you delegate the member initialization to another constructor, 
+                    there is an assumption that the other constructor initializes the object completely, 
+                    including all members (i.e. including the lines member in your example).
+                    You can't therefore initialize any of the members again.
+                    */
+                }
+            };
+        }
 	};
 }
