@@ -229,5 +229,38 @@ namespace LearnCpp
 
         }
 
+
+        // lambda as parameter
+		template<typename func>
+		void filter(func f, vector<int> vec) {
+            tlog << "\n";
+            for (auto i : vec) {
+                if (f(i)) {
+                    tlog << i << "\t";
+                }
+            }
+		}
+
+
+        TEST_METHOD(test_lambda) {
+
+            // anonymous lambda function 
+            tlog << "give me a seven = " << [](int x, int y) { return x + y;  }(3, 4) << "\n";
+
+            // named lambda function
+            auto f = [](int x, int y) { return x + y;  };
+            tlog << "give me a five =" << f(2, 3);
+
+            vector<int> vec{ 1,2,3,4,5,6,7,8,9,0 };
+
+
+            // functional programming
+            filter([](int x) {return x % 2 == 0;  }, vec);
+            int y = 5;
+            filter([&y](int x) {return x >= y;  }, vec);   // capture the local variable
+
+
+        }
+
 	};
 }
