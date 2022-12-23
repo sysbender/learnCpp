@@ -183,5 +183,19 @@ namespace LearnCpp
                 }
             };
         }
+
+        TEST_METHOD(test_override_virtual_function) {
+            // override - avoid inadvertently create new function in derived classes
+            class Dog  {
+                virtual void bark(int) {};
+            };
+
+            class GoodDog : Dog{
+                void bark(int) override {};
+            };
+        }
+
+
+
 	};
 }
