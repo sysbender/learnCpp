@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "tlog.h"
+#include <cassert>
 
 #define tlog Tlog()
 
@@ -147,6 +148,16 @@ namespace LearnCpp
             //11 enum class - scoped
             enum class shape {square, circle};
             tlog << "\n square=" <<  static_cast<std::underlying_type_t<shape>>(shape::square);
+
+        }
+
+        TEST_METHOD(test_assert) {
+            //03 - run time assert
+            assert( 1==1);
+
+            // 11 - static_assert : compile time
+            static_assert(sizeof(int) == 4, " 4 byte int");
+
 
         }
 	};
