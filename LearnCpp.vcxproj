@@ -156,7 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="LearnCpp.cpp" />
+    <ClCompile Include="LearnCpp11.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tlog.h" />
