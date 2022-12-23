@@ -208,5 +208,17 @@ namespace LearnCpp
 
         }
 
+        TEST_METHOD(test_delete_function) {
+            class Dog {
+            public:
+                Dog(int age) {};
+                Dog(double age) = delete;           //not allow
+                Dog& operator=(const Dog&) = delete; //not allow copy constructor
+            };
+
+            Dog d= Dog(3);
+
+        }
+
 	};
 }
