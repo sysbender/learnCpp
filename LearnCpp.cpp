@@ -138,7 +138,15 @@ namespace LearnCpp
 
             foo(NULL);  // cpp  03 , NULL is int 0
             foo(nullptr); // cpp 11 , nullptr
+        }
 
+        TEST_METHOD(test_enum_class) {
+            //03 enum - global
+            enum color {red, green, blue};
+            tlog << "\n red=" << red;
+            //11 enum class - scoped
+            enum class shape {square, circle};
+            tlog << "\n square=" <<  static_cast<std::underlying_type_t<shape>>(shape::square);
 
         }
 	};
