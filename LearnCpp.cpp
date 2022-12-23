@@ -220,5 +220,14 @@ namespace LearnCpp
 
         }
 
+        // constexpr - compute at compile time not run time
+        constexpr int MeaningOfLife(int a, int b) { return a * b; }
+
+        TEST_METHOD(test_constexpr) {		
+
+			const int meaningOfLife = MeaningOfLife(6, 7);
+
+        }
+
 	};
 }
