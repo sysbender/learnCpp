@@ -157,6 +157,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="LearnCpp11.cpp" />
+    <ClCompile Include="TestExample.cpp" />
+    <ClCompile Include="TestMovingSemantics.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tlog.h" />

@@ -17,4 +17,4 @@ public:
 	}
 
 };
-
+#define tlog Tlog()
