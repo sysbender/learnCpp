@@ -15,7 +15,7 @@ namespace MovingSemantics {
 	public:
 
 			TEST_METHOD(Test_Rvalue_Lvalue)
-		{
+			{
 
 				// lvalue - an object has identifiable location in memory
 				// rvalue - not a lvalue
@@ -42,7 +42,7 @@ namespace MovingSemantics {
 				int x4 = i3;
 
 				//
-				int v[3]; 
+				int v[3] = {1,2,3};
 				*(v + 2) = 4; // v+2 is rvalue , but explicitly to create a lvalue by dereference
 
 
@@ -72,9 +72,67 @@ namespace MovingSemantics {
 
 				
  
-		}
+			}
 
-			// rvalue reference
+		
+			void printRef(int& i) { tlog << "\nlvalue ref=" << i;  }	// param is lvalue ref
+			void printRef(int&& i) { tlog << "\n rvalue ref=" << i; }  // param is rvalue ref
+
+			class MyVector {
+
+				double* arr_; // a big array
+			public:
+				int size;
+
+				MyVector(int s=5) {
+					tlog << "\n calling constructor...";
+					size = s;
+					arr_ = new double[size];
+					for (int i = 0; i < size; i++) {
+						arr_[i] = i * 10.0;
+					}
+				}
+				MyVector(const MyVector& rhs) { //copy constructor - expensive deep copy
+					tlog << "\n calling copy constructor...";
+					size =rhs.size;
+					arr_ = new double[size];
+					for (int i = 0; i < size; i++) { arr_[i] = rhs.arr_[i]; }
+				}
+
+				MyVector(MyVector&& rhs) { // move constructor - shallow copy
+					tlog << "\n calling move constructor...";
+					size = rhs.size;
+					arr_ = rhs.arr_;
+					rhs.arr_ = nullptr;
+				}
+
+				~MyVector() { delete arr_; }
+			};
+
+			void foo(MyVector v) { tlog << "\nmyvector size=" << v.size; };
+			MyVector createMyVector() { return MyVector();  };
+
+			
+		TEST_METHOD(test_moving_semantics) {
+			//rvalue reference - useful for overloading copy constructor and copy assignment operator to archieve move semantics
+			int a = 5;
+			int& b = a; // b is lvalue referernce
+			
+			printRef(a);	// call with lvalue ref
+			printRef(6);	// call with rvalue ref
+
+			//--------------------------------------------------
+			MyVector reusable = createMyVector();
+			foo(reusable); // this will call the copy constrcutor
+
+			//foo(createMyVector()); // rvalue as param, call move constructor  (not called  by copy elision)
+			foo(std::move(reusable));  // call move constructor
+
+
+			// move semantics is implemented for all STL container, 
+			// so passing -by value can be used for STL containers
+
+		}
 
 
 
