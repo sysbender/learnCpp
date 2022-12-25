@@ -211,6 +211,41 @@ namespace MovingSemantics {
 
 			tlog << "\n110 = " << "110"_bin;
 		}
+		
+
+
+		/* c++ 03
+		* 1. default constructor (generated only if no constructor is declared by the user)
+		* 2. copy constructor (generated only if no 3,4 ,5 and 6 declared by user)
+		* 3. copy assignment operator (generated only if no 2,4, 5 and 6 declared by user)
+		* 4. destructor 
+		* c++ 11
+		* 5. move constructor  (generated only if no 2,3,4,6 declared by user )
+		* 6. move assignment operator  (generated only if no 2,3,4,5 declared by user )
+		*/
+
+		
+		TEST_METHOD(test_compiler_generated_functions) {
+			// Dog(); will be
+			class Dog {
+				// c++ 03
+				Dog();
+				Dog(const Dog& rhs) {};
+				Dog& operator= (const Dog& rhs) {};
+				~Dog();
+
+				// c++ 11
+				Dog(const Dog&& rhs) {};
+				Dog& operator= (Dog&& rhs) {};
+			};
+
+
+			class Cow {
+				Cow& operator=(const Cow&) = delete;  // copy assignment operator is declared by user
+				Cow(const Cow& rhs) = default;   //  bring back copy constructor since it's deprecated by the previous line 
+			};
+
+		}
 
 	};
 }
