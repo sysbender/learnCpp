@@ -9,6 +9,20 @@ using namespace std;
 
 namespace MovingSemantics {
 
+	//--------user defined literals
+	constexpr long double operator"" _cm(long double x) { return x * 10; }
+	constexpr long double operator"" _m(long double x) { return x * 1000; }
+	constexpr long double operator"" _mm(long double x) { return x; }
+
+	int operator"" _bin(const char* str, size_t l) {
+		int ret = 0;
+		for (int i = 0; i < l; i++) {
+			ret = ret << 1;
+			if (str[i] == '1') { ret += 1; }
+		}
+		return ret;
+	}
+
 	TEST_CLASS(MovingSemanticsClass)
 	{
 
@@ -176,7 +190,7 @@ namespace MovingSemantics {
 		template <class T>
 		struct remote_reference;
 		remove_reference<int&>::type i; // int i;
-		remove_reference<int>::type i; // int i;
+		remove_reference<int>::type j; // int j;
 
 		//   T&& arg; is r-reference when arg is r value
 		//   T&& arg; is l-reference when arg is l value
@@ -188,6 +202,15 @@ namespace MovingSemantics {
 		*  1) move semantics	std::move<T>(arg);				- turn arg into R value type
 		*  2) perfect forwarding	std::forward<T>(arg);		- turn arg to type of T&&  (static_cast)
 		*/
+
+
+
+		TEST_METHOD(test_user_defined_literals) {
+			long double height = 3.4_cm;
+			tlog << "\n height(mm) = " << height + 1.0_m;
+
+			tlog << "\n110 = " << "110"_bin;
+		}
 
 	};
 }
