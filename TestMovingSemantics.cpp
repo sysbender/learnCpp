@@ -136,5 +136,58 @@ namespace MovingSemantics {
 
 
 
+		template<typename T>
+		void relay(T arg) {	//argument forwarding to foo
+			foo(arg);
+		}
+
+		// perfect forwarding
+		// 1. no costly and unnecessary copy construction is made
+		// 2. rvalue is forwarded as rvalue, lvalue is forwarded as lvalue
+
+		template<typename T>
+		void relayPerfect(T&& arg) {
+			foo(std::forward<T>(arg));
+		}
+		TEST_METHOD(test_perfect_forwarding) {
+
+			MyVector reusable = createMyVector();
+			relay(reusable); // param is lvalue
+			relay(createMyVector()); // param is rvalue
+
+			relayPerfect(reusable); // param is lvalue
+			relayPerfect(createMyVector()); // param is rvalue
+
+
+			// explaination
+			/* reference collapsing rules in c++ 11
+			* 1. T& & => T&
+			* 2. T& && => T&
+			* 3.T&& & => T&
+			* 4. T&& && => T&& 
+			*/
+
+			
+
+
+
+
+		}
+		template <class T>
+		struct remote_reference;
+		remove_reference<int&>::type i; // int i;
+		remove_reference<int>::type i; // int i;
+
+		//   T&& arg; is r-reference when arg is r value
+		//   T&& arg; is l-reference when arg is l value
+		// so && is an universal reference when 1)  T is a template type, 
+			// 2) type deduction (reference collapsing ) happens to T (T is a function template type, not a class template type)
+		
+		/* summary
+		*  r Value reference used for 
+		*  1) move semantics	std::move<T>(arg);				- turn arg into R value type
+		*  2) perfect forwarding	std::forward<T>(arg);		- turn arg to type of T&&  (static_cast)
+		*/
+
 	};
 }
