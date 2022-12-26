@@ -76,6 +76,15 @@ namespace SmartPointer {
 
 			tlog << "\n === finished deleting d1,d2,d3";
 
+			// customized shared pointer deleter - use shared pointer constructor instead of make_shared
+			shared_ptr<Dog> dd = shared_ptr<Dog>(new Dog("CustomDog"),
+				[](Dog* pDog) { tlog << "\n customized deleting Dog"; delete  pDog; }  // deleter is a lambda with a param T*
+			);
+
+			// customized deleter is a must for array shared pointer
+			shared_ptr<Dog> da = shared_ptr<Dog>(new Dog[3], 
+				[](Dog* p) { delete[] p; }
+				);
 		}
 
 
