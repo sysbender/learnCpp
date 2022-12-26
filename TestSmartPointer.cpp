@@ -120,5 +120,57 @@ namespace SmartPointer {
 			dGirl->showFrind();
 		}
 
+		// unique pointer - exclusive ownership, light weight smart pointer
+		TEST_METHOD(test_unique_pointer) {
+
+			class Dog {				
+			public:
+				string m_name;
+				Dog() { m_name = "nameless"; tlog <<  "\n create Dog : " << m_name; }
+				Dog(string name) { tlog << "\n create Dog : " << name; m_name = name; }
+				void bark() { tlog << "\nDog barking :" << m_name; }
+				~Dog() { tlog << "\n Dog destroyed :" << m_name; }
+				 
+			};
+
+
+			
+
+			{
+				unique_ptr<Dog> pd1(new Dog("uniqueDog1"));
+				pd1->bark();
+				pd1.reset(new Dog("uniqueDog2"));
+				
+				pd1->bark();
+				Dog* pD2 = pd1.release();   // release raw pointer // shared_ptr use get
+				if (!pd1) {
+					tlog << "\n unique pointer is released and empty";
+				}
+
+				unique_ptr<Dog> pd3(new Dog("uniqueDog3"));
+				pd1 = move(pd3);  // transfer ownership
+				pd1->bark();
+				pd1.reset(); // same as pd1=nullptr;
+
+
+			}
+
+			auto Consumer = [](unique_ptr<Dog> p) {
+				p->bark();
+			};
+
+			auto Producer = []() {
+				return unique_ptr<Dog>(new Dog("NewDog"));  // return unique pointer will auto use move semantics
+			};
+
+
+			unique_ptr<Dog> pd11 = Producer();
+			// pd11->bark();
+			Consumer(move(pd11));  // use move semantic for unique pointer param
+
+			// unique pointer not needs customized deleter  for array as shared pointer
+			unique_ptr<Dog[]> pd21(new Dog[3]);
+		}
+
 	};
 }
