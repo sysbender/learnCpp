@@ -88,5 +88,37 @@ namespace SmartPointer {
 		}
 
 
+		// weak_ptr has no ownership of the pointed object
+		// weak_ptr like raw pointer, but not allow delete operator
+		TEST_METHOD(test_weak_pointer) {
+			class Dog {
+				weak_ptr <Dog> m_pFriend; // cyclic reference
+			public:
+				string m_name;
+				Dog(string name) { tlog << "\n create Dog : " << name; m_name = name;  }
+				void bark() { tlog << "\nDog barking :" << m_name; }
+				~Dog() { tlog << "\n Dog destroyed :" << m_name; }
+				void makeFriend(shared_ptr<Dog> f) { m_pFriend = f;  }
+
+				// weak_ptr.lick will create a shared point to make sure : object exist and will not be deleted
+				void showFrind() {
+					if (!m_pFriend.expired()) {
+						//check weak_pointer is valid
+						tlog << "\n" << m_name << " :  my friend is " << m_pFriend.lock()->m_name;
+						tlog << "\n use_count = " << m_pFriend.use_count();
+					}
+				}
+
+			};
+
+			shared_ptr<Dog> dBoy = make_shared<Dog>("dBoy");
+			shared_ptr<Dog> dGirl = make_shared<Dog>("dGirl");
+
+			dBoy->makeFriend(dGirl );
+			dGirl->makeFriend(dBoy);
+
+			dGirl->showFrind();
+		}
+
 	};
 }
