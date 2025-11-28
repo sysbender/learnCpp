@@ -377,11 +377,11 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # VS Code files for those working on multiple tools
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+# .vscode/*
+# !.vscode/settings.json
+# !.vscode/tasks.json
+# !.vscode/launch.json
+# !.vscode/extensions.json
 *.code-workspace
 
 # Local History for Visual Studio Code
@@ -396,3 +396,202 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+
+
+########################################
+# C / C++ Compiler Outputs
+########################################
+*.o
+*.obj
+*.lo
+*.la
+*.a
+*.lib
+*.dll
+*.so
+*.so.*
+*.dylib
+*.exp
+*.pdb
+*.mod
+*.smod
+*.gcda
+*.gcno
+*.gcov
+*.gch
+*.pch
+
+# C/C++ Executables
+*.exe
+*.out
+*.app
+*.elf
+
+########################################
+# Build Systems
+########################################
+
+# --- CMake ---
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+CTestTestfile.cmake
+Testing/
+Makefile
+build*/
+_build*/
+out*/
+bin/
+lib/
+
+# Ninja
+*.ninja
+.ninja_deps
+.ninja_log
+
+# Meson
+meson-logs/
+meson-private/
+meson-info/
+
+# Autotools
+Makefile.in
+Makefile
+aclocal.m4
+autom4te.cache/
+compile
+config.guess
+config.log
+config.status
+config.sub
+configure
+depcomp
+install-sh
+ltmain.sh
+missing
+
+########################################
+# IDEs & Editors
+########################################
+
+# --- Visual Studio Code ---
+.vscode/
+*.code-workspace
+
+# --- Visual Studio / MSVC ---
+.vs/
+*.user
+*.opensdf
+*.sdf
+*.tlog
+*.ipch
+*.pdb
+*.db
+Debug/
+Release/
+x64/
+x86/
+[Bb]uild/
+GeneratedFiles/
+
+# --- Xcode ---
+*.xcodeproj/*
+*.xcworkspace/*
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData/
+
+# --- CLion / JetBrains ---
+.idea/
+cmake-build-*/
+.clion/
+
+########################################
+# Operating System Files
+########################################
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+*.swp
+
+# Linux
+*~
+.cache/
+*.swp
+*.swo
+
+########################################
+# Logs and Temp Files
+########################################
+*.log
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.pid
+
+########################################
+# Debuggers
+########################################
+gdb_history
+lldb_history
+
+########################################
+# Package Managers (if any)
+########################################
+
+# Conan
+.conan/
+conanbuild/
+conaninfo.txt
+conan.lock
+
+# vcpkg
+vcpkg_installed/
+vcpkg_buildtrees/
+vcpkg_packages/
+
+########################################
+# Misc
+########################################
+*.cmake
+*.depend
+*.d
+*.lst
+*.map
+
+# Remove common unintended commits
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+
+
+# debug symbol files
+**/*.dSYM/
+
+# binary executables on macOS
+
+# Ignore all files with no extension
+**/.*
+
+
