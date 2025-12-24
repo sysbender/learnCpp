@@ -5,7 +5,7 @@
       "includePath": [
         "${workspaceFolder}/**"
       ],
-      "compilerPath": "/usr/bin/clang",
+      "compilerPath": "/usr/binclang",
       "cStandard": "${default}",
       "cppStandard": "c++17",
       "intelliSenseMode": "macos-clang-arm64",

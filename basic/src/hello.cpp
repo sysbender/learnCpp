@@ -1,9 +1,10 @@
 #include <iostream>
 #include <vector>
 
-int main() {
+int main()
+{
     std::vector<int> v = {1, 2, 3};
 
-    std::cout << "Hello world!" << std::endl;
+    std::cout << "Hello world-a!" << std::endl;
     return 0;
 }

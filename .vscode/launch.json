@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/jason/workspace/learnCpp/basic",
-      "program": "/Users/jason/workspace/learnCpp/basic/build/Debug/outDebug"
+      "cwd": "/Users/jason/workspace/learnCpp/inter",
+      "program": "/Users/jason/workspace/learnCpp/inter/build/Debug/outDebug"
     }
   ]
 }
